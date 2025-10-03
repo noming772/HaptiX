@@ -74,3 +74,8 @@ Ensure both phone and PC are on the same Wi-Fi.
 #### 5. Run and test
 Launch the app, select Left/Right hand and Y/Z axis. Perform pinch/drag/rotation and check that Unity hands move. On collisions, the phone should vibrate.
 
+
+## Results
+Using two smartphones, HaptiX controls left and right virtual hands independently. Each hand follows its configured axis mode (Y or Z) for translation and rotation. The system supports grasping objects, lifting them, rotating while held, and then releasing to drop — all driven by real-time touch input from the phones.
+
+## Demo Video
