@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#4AAEE6">
+
+        <TextView
+            android:id="@+id/welcomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_text"
+            android:textSize="25sp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"
+            android:fontFamily="@font/suit_semibold"/>
+
+        <View
+            android:id="@+id/touchArea"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:contentDescription="@string/touch_area_desc"
+            android:fontFamily="@font/suit_regular"/>
+    </FrameLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/statusContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_margin="12dp"
+        app:cardBackgroundColor="@color/white_80"
+        app:cardCornerRadius="12dp"
+        app:cardUseCompatPadding="false"
+        app:strokeWidth="0dp">
+
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/touch_area_label"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:padding="10dp"
+            android:fontFamily="@font/suit_regular"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:id="@+id/bottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_bottom_sheet"
+        android:elevation="16dp"
+        app:layout_behavior="@string/bottom_sheet_behavior"
+        app:behavior_peekHeight="24dp"
+        app:behavior_fitToContents="false"
+        app:behavior_halfExpandedRatio="0.6"
+        app:behavior_hideable="false">
+
+        <LinearLayout
+            android:id="@+id/handleArea"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless">
+            <View
+                android:layout_width="36dp"
+                android:layout_height="4dp"
+                android:background="@drawable/bs_handle" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/titleSelectHand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_title"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:fontFamily="@font/suit_semibold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iconLeft"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/lefthand"
+                android:contentDescription="@string/mode_red"
+                android:layout_marginEnd="6dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/labelLeft"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/mode_red"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/suit_regular"/>
+
+            <RadioButton
+                android:id="@+id/radioRed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/radio_tint" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iconRight"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/righthand"
+                android:contentDescription="@string/mode_blue"
+                android:layout_marginEnd="6dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/labelRight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/mode_blue"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/suit_regular"/>
+
+            <RadioButton
+                android:id="@+id/radioBlue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/radio_tint" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/titleAxis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/axis_title"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/suit_semibold"/>
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/axisToggleGroup"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            app:checkedButton="@+id/btnAxisY">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAxisY"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/axis_y"
+                android:textSize="16sp"
+                android:checkable="true"
+                android:minWidth="0dp"
+                android:gravity="center"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:cornerRadius="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/primary_blue"
+                app:rippleColor="@color/toggle_ripple"
+                android:textColor="@color/toggle_text"
+                app:backgroundTint="@color/toggle_bg"
+                android:fontFamily="@font/suit_regular"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAxisZ"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/axis_z"
+                android:textSize="16sp"
+                android:checkable="true"
+                android:minWidth="0dp"
+                android:gravity="center"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:cornerRadius="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/primary_blue"
+                app:rippleColor="@color/toggle_ripple"
+                android:textColor="@color/toggle_text"
+                app:backgroundTint="@color/toggle_bg"
+                android:fontFamily="@font/suit_regular"/>
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#4AAEE6"
+            app:cornerRadius="12dp"
+            android:fontFamily="@font/suit_regular"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

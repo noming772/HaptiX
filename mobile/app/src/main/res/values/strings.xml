@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HapticHands Mobile</string>
+    <string name="mode_red">Left Hand</string>
+    <string name="mode_blue">Right Hand</string>
+    <string name="touch_area_label">Touch Space</string>
+    <string name="touch_area_desc">터치 가능한 영역</string>
+    <string name="select_ray">Select Hand</string>
+    <string name="radio_title">Select Hand</string>
+    <string name="welcome_text">Pinch and Drag</string>
+    <string name="save">Save</string>
+    <string name="axis_title">Axis Settings</string>
+    <string name="axis_y">Y axis</string>
+    <string name="axis_z">Z axis</string>
+</resources>
