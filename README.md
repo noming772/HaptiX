@@ -79,3 +79,6 @@ Launch the app, select Left/Right hand and Y/Z axis. Perform pinch/drag/rotation
 Using two smartphones, HaptiX controls left and right virtual hands independently. Each hand follows its configured axis mode (Y or Z) for translation and rotation. The system supports grasping objects, lifting them, rotating while held, and then releasing to drop — all driven by real-time touch input from the phones.
 
 ## Demo Video
+https://youtube.com/shorts/u9O4cB-bul0?feature=share
+
+
