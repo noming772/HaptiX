@@ -57,15 +57,18 @@ Bake the skinned hand mesh and use V-HACD convex colliders for robust physics co
 Open the project in Unity, load SampleScene, and press Play.
 
 #### 2. Build and install Android app
-Build a Release APK in Android Studio, set the Unity PC's IP in the app, and keep UDP port 7777.
-Install the APK on your phone.
+Build a Release APK in Android Studio, and install it on your phone.
+In the app, set the Unity PC's IP:
+- On Windows, open Command Prompt and run: ipconfig
+- Copy the IPv4 Address of your Wi-Fi. (e.g., 192.168.x.x)
+- Enter this IPv4 in the app's IP field and Save.
 
 #### 3. Connect devices to same Wi-Fi
 Ensure both phone and PC are on the same Wi-Fi.
 
 #### 4. Allow UDP port 7777
-- Quick way : Turn off Windows Defender Firewall.
-- Safer way : Add Inbound rule → UDP → port 7777 → Allow.
+- Turn off Windows Defender Firewall.
+- Add Inbound rule → UDP → port 7777 → Allow. (UDP port is fixed to 7777.)
 
 #### 5. Run and test
 Launch the app, select Left/Right hand and Y/Z axis. Perform pinch/drag/rotation and check that Unity hands move. On collisions, phone should vibrate.
