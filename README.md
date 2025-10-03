@@ -4,14 +4,14 @@ Real-time multi-hand haptic interaction system using smartphones and Unity3D. Tu
 <img width="1281" height="652" alt="fig  3" src="https://github.com/user-attachments/assets/61ec5100-5818-4beb-847d-c61cf22b81a7" />
 
 ## Overview
-HaptiX is a smartphone-based real-time haptic interaction system. Instead of relying on costly, cumbersome haptic devices, HaptiX uses everyday phones to control skinned 3D hand models in Unity3D. Pinch, drag, and rotation gestures are transmitted via UDP, enabling translation, rotation, and grasp/release. Bidirectional haptic feedback—phone vibration and sound—provides immersive touch cues. With two phones, users can independently control left and right hands for coordinated bi-manual interaction.
+HaptiX is a smartphone-based real-time haptic interaction system. Instead of relying on costly, cumbersome haptic devices, HaptiX uses everyday phones to control skinned 3D hand models in Unity3D. Pinch, drag, and rotation gestures are transmitted via UDP, enabling translation, rotation, and grasp/release. Bidirectional haptic feedback—phone vibration and sound—provides immersive touch cues. With two phones, users can independently control left and right hands for coordinated bimanual interaction.
 
 
 ## Features
 - #### Smartphone-based haptic control
   Uses smartphones as controllers without requiring expensive haptic devices.
 - #### Multi-hand coordination with two smartphones
-  Each smartphone independently controls left or right hand for coordinated bi-manual interaction.
+  Each smartphone independently controls left or right hand for coordinated bimanual interaction.
 - #### Bidirectional haptic feedback
   When collisions occur, smartphones provide vibration and audio feedback for immersive touch experience.
 - #### Real-time UDP communication
@@ -29,7 +29,7 @@ The system operates in the following steps:
 Detect multi-touch gestures (pinch, drag, rotation). Convert them into control commands with selected hand (Left/Right) and axis mode (Y or Z). When the touch ends, the state returns to Release. Phones also receive haptic commands to trigger vibration and audio.
 
 ### Step 2 - UDP Communication
-Transmit gesture packets from smartphone to Unity and return haptic events from Unity to smartphone over the same UDP channel for low-latency, bidirectional updates.
+Transmit gesture packets from smartphone to Unity and return haptic events from Unity to the smartphone over the same UDP channel for low-latency, bidirectional updates.
 
 ### Step 3 - Unity Processing & Hand Model
 The UDP receiver syncs packets to the main thread, maps gestures to hand translation/rotation, and switches states (Grab/Release). The hand animation controller plays context-appropriate motions for natural interaction.
@@ -68,8 +68,9 @@ Ensure both phone and PC are on the same Wi-Fi.
 
 #### 4. Allow UDP port 7777
 - Turn off Windows Defender Firewall.
-- Add Inbound rule → UDP → port 7777 → Allow. (UDP port is fixed to 7777.)
+- UDP port is fixed to 7777.
+- Add Inbound rule → UDP → port 7777 → Allow.
 
 #### 5. Run and test
-Launch the app, select Left/Right hand and Y/Z axis. Perform pinch/drag/rotation and check that Unity hands move. On collisions, phone should vibrate.
+Launch the app, select Left/Right hand and Y/Z axis. Perform pinch/drag/rotation and check that Unity hands move. On collisions, the phone should vibrate.
 
