@@ -1,6 +1,7 @@
 package com.example.haptichands_mobile;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -9,8 +10,10 @@ import android.os.VibratorManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,8 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView statusText;
 
-    private String unityIP = "192.168.0.224";
-    private int unityPort = 7777;
+    private static final int unityPort = 7777;
+
+    private volatile String unityIP = "";
+
     private String objectType = "HAND_A";
 
     private float lastAngle = 0f;
@@ -45,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     private MaterialButtonToggleGroup axisToggleGroup;
     private volatile boolean useYAxis = true;
 
+    private SharedPreferences prefs;
+    private EditText ipInput;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,13 +62,22 @@ public class MainActivity extends AppCompatActivity {
         View touchArea = findViewById(R.id.touchArea);
         touchArea.setOnTouchListener(this::handleTouch);
 
+        prefs = getSharedPreferences("haptix", MODE_PRIVATE);
+        unityIP = prefs.getString("unityIP", "");
+        ipInput = findViewById(R.id.ipInput);
+        if (ipInput != null) ipInput.setText(unityIP);
+
+        if (unityIP.isEmpty()) {
+            statusText.setText("Set IP first.");
+        }
+
         initVibrator();
         startUdpReceiver();
 
         View bottomSheet = findViewById(R.id.bottomSheet);
         behavior = BottomSheetBehavior.from(bottomSheet);
         behavior.setFitToContents(false);
-        behavior.setHalfExpandedRatio(0.6f);
+        behavior.setHalfExpandedRatio(0.7f);
         behavior.setPeekHeight(dp(24));
         behavior.setHideable(false);
         behavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
@@ -112,8 +129,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btnSave).setOnClickListener(v -> {
-            lockHalf = false;
-            behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            if (ipInput != null) {
+                String ip = ipInput.getText().toString().trim();
+                if (isValidIPv4(ip)) {
+                    unityIP = ip;
+                    prefs.edit().putString("unityIP", unityIP).apply();
+                    statusText.setText("Saved IP: " + unityIP + ":" + unityPort);
+
+                    lockHalf = false;
+                    behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                } else {
+
+                    Toast.makeText(MainActivity.this,
+                            "Invalid IP.",
+                            Toast.LENGTH_SHORT).show();
+                    if (ipInput.requestFocus()) {
+                        ipInput.setSelection(ip.length());
+                    }
+                }
+            }
         });
 
         behavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
@@ -169,7 +203,6 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         rxSocket.receive(packet);
                         String msg = new String(packet.getData(), 0, packet.getLength()).trim();
-                        String from = packet.getAddress() != null ? packet.getAddress().getHostAddress() : "?";
                         runOnUiThread(() -> statusText.setText(prettyStatus("RX: " + msg)));
                         if (msg.startsWith("VIBRATE")) {
                             vibrateOnce(80);
@@ -281,6 +314,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendUDPMessage(String message) {
+        if (!isValidIPv4(unityIP)) {
+            runOnUiThread(() -> Toast.makeText(
+                    MainActivity.this,
+                    "Please set a valid IP first.",
+                    Toast.LENGTH_SHORT
+            ).show());
+            return;
+        }
+
         Log.d("TouchController", "SEND to " + unityIP + ":" + unityPort + " -> " + message);
         new Thread(() -> {
             try {
@@ -297,5 +339,20 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("TouchController", "UDP send failed", e);
             }
         }).start();
+    }
+
+    private boolean isValidIPv4(String ip) {
+        if (ip == null || ip.isEmpty()) return false;
+        String[] parts = ip.split("\\.");
+        if (parts.length != 4) return false;
+        for (String p : parts) {
+            try {
+                int n = Integer.parseInt(p);
+                if (n < 0 || n > 255) return false;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
+        return true;
     }
 }
