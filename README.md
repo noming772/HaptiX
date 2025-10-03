@@ -13,7 +13,7 @@ HaptiX is a smartphone-based real-time haptic interaction system. Instead of rel
 - #### Multi-hand coordination with two smartphones
   Each smartphone independently controls left or right hand for coordinated bimanual interaction.
 - #### Bidirectional haptic feedback
-  When collisions occur, smartphones provide vibration and audio feedback for immersive touch experience.
+  When collisions occur, smartphones provide vibration and audio feedback for an immersive touch experience.
 - #### Real-time UDP communication
   Ensures low-latency transmission of gestures and feedback between smartphones and Unity3D.
 - #### Convex collider generation with V-HACD
@@ -79,6 +79,6 @@ Launch the app, select Left/Right hand and Y/Z axis. Perform pinch/drag/rotation
 Using two smartphones, HaptiX controls left and right virtual hands independently. Each hand follows its configured axis mode (Y or Z) for translation and rotation. The system supports grasping objects, lifting them, rotating while held, and then releasing to drop — all driven by real-time touch input from the phones.
 
 ## Demo Video
-https://youtube.com/shorts/u9O4cB-bul0?feature=share
+[![HaptiX Demo](https://img.youtube.com/vi/u9O4cB-bul0/hqdefault.jpg)](https://youtu.be/u9O4cB-bul0)
 
 
